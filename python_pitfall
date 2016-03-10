@@ -1,0 +1,4 @@
+# create a 2D array must be
+a = [[False for i in range(self.col_num)] for j in range(self.row_num)]
+# not
+# a = [[False] * 5] * 5
