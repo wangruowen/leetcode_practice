@@ -21,16 +21,28 @@ class Solution(object):
                     # p = q - 1
                     # p += 1
                     break
-            # else:
-            #     if p + 2 < q:
-            #         arithmetic_slice_pq_pairs.add((p, q - 1))
-                # when q == len(A), execute the following
-                # Note that the break in Line 20 won't get here
+                    # else:
+                    #     if p + 2 < q:
+                    #         arithmetic_slice_pq_pairs.add((p, q - 1))
+                    # when q == len(A), execute the following
+                    # Note that the break in Line 20 won't get here
             p += 1
 
         print(arithmetic_slice_pq_pairs)
 
         return len(arithmetic_slice_pq_pairs)
+
+    def numberOfArithmeticSlices_dp(self, A):
+        dp = 0
+        sum = 0
+        for i in range(2, len(A)):
+            if A[i] - A[i - 1] == A[i - 1] - A[i - 2]:
+                dp += 1
+                sum += dp
+            else:
+                dp = 0
+
+        return sum
 
 
 s = Solution()
