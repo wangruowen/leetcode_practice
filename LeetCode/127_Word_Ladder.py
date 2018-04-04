@@ -37,7 +37,7 @@ class Solution(object):
                 result_set.add(word[:i] + c + word[i + 1:])
         return result_set
 
-
+    # deprecated
     def next_layer_of_words(self, cur_layer_word_set, length):
         """
         BFS style searching
@@ -61,7 +61,7 @@ class Solution(object):
         self.remainingWordSet -= next_layer_word_set
         return self.next_layer_of_words(next_layer_word_set, length)
 
-
+    # deprecated
     @staticmethod
     def is_one_letter_diff(word1, word2):
         if word1 == word2:
