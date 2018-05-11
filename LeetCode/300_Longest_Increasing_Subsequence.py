@@ -7,6 +7,7 @@ class Solution(object):
         """
         # Imagine a hash map with different lengths as each keys and
         # queues as values
+        # DP
         # dp[len] keeps the minimum value of subsequence with length "len"
         if len(nums) == 0: return 0
         dp = [nums[0]]
