@@ -5,3 +5,13 @@ a = [[False for i in range(self.col_num)] for j in range(self.row_num)]
 
 # 2. sorted(array) does not modify the original array
 # array.sort() sorts the array in place
+
+# 3 Reverse a linked list
+last, cur = None, head
+while cur:
+    tmp = cur.next
+    cur.next = last
+    last = cur
+    cur = tmp
+
+head = last
