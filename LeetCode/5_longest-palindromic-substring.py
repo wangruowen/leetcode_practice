@@ -118,10 +118,32 @@ class Solution(object):
             else:
                 return max_pan2
 
+    def longestPalindrome_v3(self, s):
+        # dp[i][j] indicates whether s[i:j + 1] is palindrome or not
+        # dp[i][j] = s[i] == s[j] && dp[i+1][j-1]
+        dp = [[False for _ in range(len(s))] for _ in range(len(s))]
+        for i in range(len(s)):
+            dp[i][i] = True
+            if i < len(s) - 1 and s[i] == s[i + 1]:
+                dp[i][i + 1] = True
+
+        max_pair = None
+        max_len = 0
+        for length in range(2, len(s)):
+            for k in range(len(s) - length):
+                if s[k] == s[k + length]:
+                    dp[k][k + length] = dp[k + 1][k + length - 1]
+                    if dp[k][k + length] and length > max_len:
+                        max_len = length
+                        max_pair = (k, k + length)
+
+        return s[max_pair[0]:max_pair[1] + 1]
+
+
 
 
 s = Solution()
-print(s.longestPalindrome_v2(
+print(s.longestPalindrome_v3(
 # "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg"
 # "abab"
 #     "abaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaaba"
