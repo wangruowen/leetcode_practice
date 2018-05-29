@@ -21,7 +21,7 @@ class Solution(object):
             new_set = set()
             for each in exist_set:
                 for i in range(len(each) + 1):
-                    # (%s) and insert () to every gap of previous parentheses
+                    # insert () to every gap of previous parentheses, including before and after previous parentheses
                     new_set.add(each[:i] + "()" + each[i:])
             self.helper(n - 1, total_set, new_set)
 
