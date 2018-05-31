@@ -15,3 +15,16 @@ while cur:
     cur = tmp
 
 head = last
+
+# 4. Binary Search
+def _binary_search(self, nums, target):
+    start, end = 0, len(nums)
+    while start < end:
+        mid = (start + end) / 2
+        if target < nums[mid]:
+            end = mid
+        elif target > nums[mid]:
+            start = mid + 1
+        else:
+            return mid
+    return -1
