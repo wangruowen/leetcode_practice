@@ -7,6 +7,8 @@ class Solution(object):
         :rtype: int
         """
         # Dynamic Programming
+        # dp[i] is the max amount to rob till i-th item
+        # dp[i] = max(dp[i-1], dp[i-2] + nums[i])
         if len(nums) == 0: return 0
 
         sum_till = [0] * len(nums)
