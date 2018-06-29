@@ -33,14 +33,15 @@ class Solution(object):
             for i in range(31, -1, -1):
                 mask = 1 << i
                 if each & mask == mask:
-                    # bit 1 in cur item, we want to find bit 0
+                    # bit 1 in cur item, we want to find bit 0, so that we can keep this bit as 1
                     if 0 in node.children:
-                        cur_xor |= mask
+                        cur_xor |= mask  # set current bit as 1
                         node = node.children[0]
                     else:
-                        cur_xor &= ~mask
+                        cur_xor &= ~mask # set current bit as 0
                         node = node.children[1]
                 else:
+                    # The opposite
                     if 1 in node.children:
                         cur_xor |= mask
                         node = node.children[1]

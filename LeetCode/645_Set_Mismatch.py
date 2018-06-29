@@ -17,6 +17,28 @@ class Solution(object):
 
         return [duplicate_num, missing_num]
 
+    def findErrorNums2(self, nums):
+        # For each visited, we mark the corresponding indexed num as negative
+        dup = None
+        for i, c in enumerate(nums):
+            if c < 0:
+                c = abs(c)
+
+            # Mark c-1 th num negative
+            if nums[c - 1] < 0:
+                # Already visited
+                dup = c
+            else:
+                nums[c - 1] *= -1
+        miss = None
+        for i, c in enumerate(nums):
+            if c > 0:
+                miss = i + 1
+        return dup, miss
+
+
+
+
 
 s = Solution()
 print(s.findErrorNums([1, 5, 3, 2, 2, 7, 6, 4, 8, 9]))
