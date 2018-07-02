@@ -9,6 +9,7 @@ class Solution(object):
         :rtype: int
         """
         # Priority Queue, using heapq, pop len(nums) - k
+        # heapify: O(log n), heappop: O(log n), heappush: O(log n)
         heapq.heapify(nums)
         for _ in range(len(nums) - k):
             heapq.heappop(nums)
