@@ -5,7 +5,7 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        # DFS S[0] = {A[0], S[A[0]]}
+        # DFS with memory S[0] = {A[0], S[A[0]]}
         S = [-1 for _ in range(len(nums))]
         max_len = 0
         for i, a in enumerate(nums):
