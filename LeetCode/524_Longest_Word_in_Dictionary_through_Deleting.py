@@ -6,6 +6,7 @@ class Solution(object):
         :type d: List[str]
         :rtype: str
         """
+        # Find longest subsequence in the dict
         d.sort(key=lambda x: (-len(x), x))
         for word in d:
             i = 0

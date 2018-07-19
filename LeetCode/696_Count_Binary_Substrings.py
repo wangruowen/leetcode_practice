@@ -5,7 +5,7 @@ class Solution(object):
         :type s: str
         :rtype: int
         """
-        # Two sets switch
+        # Two sets switch, Sliding Window
         total_count = 0
         prev_count, curr_count = 0, 0
         for i in range(len(s)):

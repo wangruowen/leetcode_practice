@@ -26,6 +26,7 @@ class Solution:
             node.word = each  # Notify this word exists
 
         longest_word = ""
+        # BFS
         queue = [root]
         while len(queue) > 0:
             cur = queue.pop(0)

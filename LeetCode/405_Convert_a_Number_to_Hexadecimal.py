@@ -1,5 +1,6 @@
 # https://leetcode.com/problems/convert-a-number-to-hexadecimal/description/
 class Solution(object):
+    @deprecated
     def toHex_Base16(self, num):
         """
         :type num: int
