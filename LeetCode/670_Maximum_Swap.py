@@ -32,5 +32,5 @@ class Solution:
         return result
 
 s = Solution()
-print(s.maximumSwap(98368))
-
+# print(s.maximumSwap(98368))
+print(s.maximumSwap(92188))
