@@ -35,8 +35,7 @@ class Solution(object):
             return result
 
         # n % k is from 0 to k - 1
-        quotient = length / k
-        remainder = length % k
+        quotient, remainder = divmod(length, k)
         # Evenly assign one from remainder to each part
         cur = root
         while cur:

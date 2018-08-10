@@ -29,6 +29,6 @@ class Solution(object):
 
         return sum
 
-a = [2, 4]
+a = [2, 1, 5, 6, 2, 3]
 s = Solution()
 print(s.largestRectangleArea(a))

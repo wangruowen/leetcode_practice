@@ -14,7 +14,7 @@ class Solution(object):
         :type root: TreeNode
         :rtype: bool
         """
-        if not root: return False
+        if not root: return True
         cur_layer = [root]
         while len(cur_layer) > 0:
             new_layer = []
@@ -33,3 +33,40 @@ class Solution(object):
                     return False
             cur_layer = new_layer
         return True
+
+    def isSymmetric_iterative(self, root):
+        """
+        :type root: TreeNode
+        :rtype: bool
+        """
+        stack = []  # Keep every pair for checking
+        if not root: return True
+        stack.append([root.left, root.right])
+        while stack:
+            left, right = stack.pop()
+            if not left and not right:
+                continue
+
+            if not left or not right or left.val != right.val:
+                return False
+
+            stack.append([left.left, right.right])
+            stack.append([left.right, right.left])
+
+        return True
+
+    def isSymmetric_Recursive(self, root):
+        """
+        :type root: TreeNode
+        :rtype: bool
+        """
+        def helper(leftnode, rightnode):
+            if not leftnode and not rightnode:
+                return True
+            if not leftnode or not rightnode or leftnode.val != rightnode.val:
+                return False
+
+            return helper(leftnode.left, rightnode.right) and helper(leftnode.right, rightnode.left)
+
+        if not root: return True
+        return helper(root.left, root.right)
