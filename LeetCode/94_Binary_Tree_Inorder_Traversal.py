@@ -41,8 +41,23 @@ class Solution(object):
                         break
         return traversal_list
 
+    def inorderTraversal_v3(self, root):
+        if not root: return []
+        stack = []
+        cur = root
+        result = []
+        while cur or stack:
+            while cur:
+                stack.append(cur)
+                cur = cur.left
+            cur = stack.pop()
+            result.append(cur.val)
+            cur = cur.right
+
+        return result
+
 s = Solution()
 root = TreeNode(1)
 root.right = TreeNode(2)
 root.right.left = TreeNode(3)
-print(s.inorderTraversal_v2(root))
+print(s.inorderTraversal_v3(root))
