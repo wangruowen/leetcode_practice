@@ -13,7 +13,7 @@ class Solution(object):
                 found = True
                 break
         if not found:
-            # reverse it
+            # reverse it in place
             i, j = 0, len(nums) - 1
             while i < j:
                 nums[i], nums[j] = nums[j], nums[i]

@@ -6,12 +6,12 @@ class Solution(object):
         :type val: int
         :rtype: int
         """
-        last_index = 0
+        last_index = -1
         for each in nums:
             if each != val:
-                nums[last_index] = each
                 last_index += 1
-        return last_index
+                nums[last_index] = each
+        return last_index + 1
 
 s = Solution()
 nums = [1, 2, 3, 4, 5, 2, 2]
