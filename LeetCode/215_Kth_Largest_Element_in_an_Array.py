@@ -16,6 +16,6 @@ class Solution(object):
         return heapq.heappop(nums)
 
 s = Solution()
-nums = [3,2,1,5,6,4]
-k = 2
+nums = [1,3,4,2]
+k = 1
 print(s.findKthLargest(nums, k))

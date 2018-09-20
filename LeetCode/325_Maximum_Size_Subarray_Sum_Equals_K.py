@@ -6,6 +6,7 @@ class Solution(object):
         :type k: int
         :rtype: int
         """
+        # HashMap
         # Because the nums can have negative values, it is not convex or concave
         # it is difficult to use two pointers, so we have to use hash map
         max_len = 0
