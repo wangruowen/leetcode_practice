@@ -9,6 +9,8 @@ class Solution(object):
         :rtype: int
         """
         # Sliding Window
+        # Base on the template of substring with start and cur pointers
+        # https://leetcode.com/problems/minimum-window-substring/discuss/26808/Here-is-a-10-line-template-that-can-solve-most-'substring'-problems
         counter = defaultdict(int)
         start = 0
         max_len = 0
