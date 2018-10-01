@@ -36,6 +36,21 @@ class Solution(object):
             max_len = max(max_len, i - low_start)
         return max_len
 
+    def findLHS_v2(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        from collections import Counter
+        counter = Counter(nums)
+        max_seq = 0
+        for k, v in counter.items():
+            if k - 1 in counter:
+                max_seq = max(max_seq, counter[k - 1] + v)
+            if k + 1 in counter:
+                max_seq = max(max_seq, counter[k + 1] + v)
+        return max_seq
+
 s = Solution()
 nums = [3,2,2,3,2,1,3,3,3,-2,0,3,2,1,0,3,1,0,1,3,0,3,3]
 nums.sort()

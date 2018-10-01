@@ -28,6 +28,34 @@ class Solution(object):
 
         return int(sum(nums_map.values()))
 
+    def findPairs_v2(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: int
+        """
+        result = 0
+        if k < 0:
+            return result
+        visited = set()
+        if k == 0:
+            from collections import Counter
+            counter = Counter(nums)
+            for _, v in counter.items():
+                if v > 1:
+                    result += 1
+            return result
+
+        for i in nums:
+            if i in visited:
+                continue
+            if i - k in visited:
+                result += 1
+            if i + k in visited:
+                result += 1
+            visited.add(i)
+        return result
+
 s = Solution()
 a=[1, 3, 1, 5, 4]
 k=0
