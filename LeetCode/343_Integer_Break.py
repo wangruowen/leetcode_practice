@@ -19,14 +19,11 @@ class Solution(object):
         max_prod[2] = 1
         max_prod[3] = 2
         max_prod[4] = 4
-        for k in xrange(5, n + 1):
-            for i in xrange(2, k - 1):
-                if k - i <= 3:
-                    # Special case for 2 and 3
-                    val = k - i
-                else:
-                    val = max_prod[k - i]
-                max_prod[k] = max(max_prod[k], i * val)
+        for k in range(5, n + 1):
+            for i in range(2, k - 1):
+                i_val = max(i, max_prod[i])
+                k_i_val = max(k - i, max_prod[k - i])
+                max_prod[k] = max(max_prod[k], i_val * k_i_val)
 
         return max_prod[n]
 
