@@ -16,3 +16,17 @@ class Solution(object):
             bit_list.append(bits)
         
         return bit_list
+
+    def countBits_v2(self, num):
+        """
+        :type num: int
+        :rtype: List[int]
+        """
+        result = [0]
+        for i in range(1, num+1):
+            # i >> 1 is already visited,
+            result.append((i & 1) + result[i >> 1])
+        return result
+
+s = Solution()
+print(s.countBits_v2(2))
