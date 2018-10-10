@@ -21,11 +21,11 @@ class Solution:
             if c == 'x': count[6] += 1
             if c == 'g': count[8] += 1
             if c == 'u': count[4] += 1
-            if c == 's': count[7] += 1  # 7-6
-            if c == 'f': count[5] += 1  # 5-4
-            if c == 'h': count[3] += 1  # 3-8
-            if c == 'i': count[9] += 1  # 9-5-6-8
-            if c == 'o': count[1] += 1  # 1-0-2-4
+            if c == 's': count[7] += 1  # 7+6
+            if c == 'f': count[5] += 1  # 5+4
+            if c == 'h': count[3] += 1  # 3+8
+            if c == 'i': count[9] += 1  # 9+5+6+8
+            if c == 'o': count[1] += 1  # 1+0+2+4
 
         # Since the above count duplicated ones
         count[7] -= count[6]
@@ -36,7 +36,7 @@ class Solution:
 
         result = ""
         for i, c in enumerate(count):
-            result  += str(i) * c
+            result += str(i) * c
         return result
 
 
