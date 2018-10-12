@@ -35,4 +35,21 @@ class Solution:
 
         return result
 
-
+    def postorderTraversal_v2(self, root):
+        if not root:
+            return []
+        stack, result = [None], []
+        visited = set()
+        node = root
+        while node:
+            while node.left and node.left not in visited:
+                stack.append(node)
+                node = node.left
+            if node.right and node.right not in visited:
+                stack.append(node)
+                node = node.right
+            else:
+                result.append(node.val)
+                visited.add(node)
+                node = stack.pop()
+        return result

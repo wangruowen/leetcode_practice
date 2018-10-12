@@ -25,8 +25,41 @@ class Solution(object):
 
         return plottable_count >= n
 
+    def canPlaceFlowers_v2(self, flowerbed, n):
+        """
+        :type flowerbed: List[int]
+        :type n: int
+        :rtype: bool
+        """
+        # Two pointers
+        result = 0
+        cur_1, next_1 = -2, 0
+        while next_1 < len(flowerbed) and flowerbed[next_1] != 1:
+            next_1 += 1
+        if next_1 == len(flowerbed):
+            next_1 += 1  # Make next_1 super large if it already reaches the end
+
+        for i, c in enumerate(flowerbed):
+            need_update = False
+            if c == 1:
+                need_update = True
+            elif cur_1 + 1 < i < next_1 - 1:
+                result += 1
+                need_update = True
+
+            if need_update:
+                cur_1 = i
+                if i + 1 >= next_1:
+                    next_1 += 1
+                    while next_1 < len(flowerbed) and flowerbed[next_1] != 1:
+                        next_1 += 1
+                    if next_1 == len(flowerbed):
+                        next_1 += 1  # Make next_1 super large if it reaches the end
+        return result >= n
+
 s = Solution()
-flowerbed = [0,0,1,0,0]
-n = 1
-print(s.canPlaceFlowers(flowerbed, n))
+# flowerbed = [0,0,1,0,0]
+flowerbed = [1,0,0,0,0,1]
+n = 2
+print(s.canPlaceFlowers_v2(flowerbed, n))
 
