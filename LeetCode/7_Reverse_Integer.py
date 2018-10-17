@@ -4,8 +4,8 @@ class Solution(object):
         :type x: int
         :rtype: int
         """
-        MAX_SIGNED_INT = 2**31
-        MIN_SIGNED_INT = -2**31 + 1
+        MAX_SIGNED_INT = 0x7fffffff
+        MIN_SIGNED_INT = -MAX_SIGNED_INT - 1
 
         str_x = str(x)
         if str_x[0] == "-":
@@ -27,4 +27,4 @@ class Solution(object):
         return reverse_x
 
 s = Solution()
-print(s.reverse("123"))
+print(s.reverse("-123"))

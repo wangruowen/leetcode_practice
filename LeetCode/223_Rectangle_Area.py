@@ -46,3 +46,24 @@ class Solution(object):
 
         # Calculate the size
         return (overlap_right_x - overlap_left_x) * (overlap_up_y - overlap_down_y)
+
+    def computeArea_v2(self, A, B, C, D, E, F, G, H):
+        """
+        :type A: int
+        :type B: int
+        :type C: int
+        :type D: int
+        :type E: int
+        :type F: int
+        :type G: int
+        :type H: int
+        :rtype: int
+        """
+        # Just sum two rectangles and minus the possible dup area
+        two_rec_sum = (D-B) * (C-A) + (H-F) * (G-E)
+        # For dup area
+        dup_down_left = [max(A, E), max(B, F)]
+        dup_up_right = [min(C, G), min(D, H)]
+        # It is possible that dup_up_right is smaller than dup_down_left, in which case, there is no overlap
+        dup_area = max(0, dup_up_right[0] - dup_down_left[0]) * max(0, dup_up_right[1] - dup_down_left[1])
+        return two_rec_sum - dup_area

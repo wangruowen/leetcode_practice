@@ -8,15 +8,12 @@ class Solution(object):
         if len(nums) <= 1:
             return len(nums)
 
-        i, j = 0, 1
-        while j < len(nums):
-            if nums[j] != nums[i]:
-                if i + 1 < j:
-                    nums[i + 1] = nums[j]
-                i += 1
-            j += 1
-
-        return i + 1
+        last = 0
+        for each in nums:
+            if nums[last] != each:
+                last += 1
+                nums[last] = each
+        return last + 1
 
 s = Solution()
 nums = [0,0,1,1,1,2,2,3,3,4]

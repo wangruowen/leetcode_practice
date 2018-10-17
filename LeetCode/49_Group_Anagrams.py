@@ -1,3 +1,5 @@
+from collections import Counter, defaultdict
+
 class Solution(object):
     def groupAnagrams(self, strs):
         """
@@ -21,6 +23,21 @@ class Solution(object):
             stats_map[i] += 1
 
         return "".join(map(lambda x: str(x), stats_map))
+
+    def groupAnagrams_v2(self, strs):
+        """
+        :type strs: List[str]
+        :rtype: List[List[str]]
+        """
+        anagram_dict = defaultdict(list)
+        for each in strs:
+            counter_str = []
+            counter = Counter(each)
+            for k in sorted(counter.keys()):
+                counter_str.append(k + ":" + str(counter[k]))
+            anagram_dict[",".join(counter_str)].append(each)
+
+        return list(anagram_dict.values())
 
 
 s = Solution()

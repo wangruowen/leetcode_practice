@@ -28,3 +28,38 @@ def _binary_search(self, nums, target):
         else:
             return mid
     return -1
+
+# 5. Check if the given string is a palindrome
+i, j = 0, len(s) - 1
+while i < j:
+    if s[i] != s[j]:
+        return False
+    i += 1
+    j -= 1
+return True
+
+# 6. To memoize if one substring is a palindrome
+dp[i][j] refers to whether s[i:j] is a palindrome
+for i in range(len(s)):
+    dp[i][i] = True
+    if i < len(s) - 1 and s[i] == s[i+1]:
+        dp[i][i+1] = True
+
+for length in range(2, len(s)):
+    for i in range(len(s) - length):
+        j = i + length
+        if s[i] == s[j]:
+            dp[i][j] = dp[i+1][j-1]
+
+# 7. Prime Factorization
+def primes(n):
+    primfac = []
+    d = 2
+    while d*d <= n:
+        while (n % d) == 0:
+            primfac.append(d)  # supposing you want multiple factors repeated
+            n //= d
+        d += 1
+    if n > 1:
+       primfac.append(n)
+    return primfac

@@ -18,20 +18,20 @@ class Solution(object):
         if numRows == 1:
             return s
 
-        rows_with_char = [[] for _ in range(numRows)]
+        rows_with_char = ["" for _ in range(numRows)]
         is_zigzag_order = False  # Initially, it's false
         cur_index = 0
 
-        for i in xrange(len(s)):
+        for each in s:
             if is_zigzag_order:
-                rows_with_char[cur_index].append(s[i])
+                rows_with_char[cur_index] += each
                 if numRows + cur_index == 0:
                     is_zigzag_order = False
                     cur_index = 1
                 else:
                     cur_index -= 1
             else:
-                rows_with_char[cur_index].append(s[i])
+                rows_with_char[cur_index] += each
                 cur_index += 1
                 if cur_index == numRows:
                     is_zigzag_order = True
