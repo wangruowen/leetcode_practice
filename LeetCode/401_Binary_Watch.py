@@ -35,5 +35,49 @@ class Solution(object):
         self.helper(n, start_index + 1, bitmap)
         bitmap.pop()
 
+    def readBinaryWatch_v2(self, num):
+        """
+        :type num: int
+        :rtype: List[str]
+        """
+        result = []
+        bitmap = [0 for _ in range(10)]
+
+        def helper(n, cur_index):
+            if n < 0:
+                return
+
+            nonlocal result, bitmap
+            if n == 0:
+                # print(bitmap)
+                hours = 0
+                for i in range(4):
+                    hours |= (bitmap[i] << i)
+                if hours > 11:
+                    # invalid
+                    return
+                minutes = 0
+                for i in range(6):
+                    minutes |= (bitmap[i+4] << i)
+                if minutes > 59:
+                    return
+                result.append("%d:%02d" % (hours, minutes))
+                return
+
+            if cur_index > 9:
+                return
+
+            tmp = bitmap[cur_index]
+            for i in [0, 1]:
+                bitmap[cur_index] = i
+                if i == 1:
+                    helper(n - 1, cur_index + 1)
+                else:
+                    helper(n, cur_index + 1)
+            bitmap[cur_index] = tmp
+
+        helper(num, 0)
+        return result
+
 s = Solution()
-print(s.readBinaryWatch(4))
+print(s.readBinaryWatch_v2(1))
