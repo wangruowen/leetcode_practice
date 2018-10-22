@@ -26,7 +26,7 @@ class Solution(object):
             min_j = nums[i]
             min_j_index = i
             for j in range(i + 1, len(nums)):
-                if nums[j] > nums[i - 1] and nums[j] < min_j:
+                if nums[i - 1] < nums[j] < min_j:
                     min_j = nums[j]
                     min_j_index = j
             # Swap i - 1 and j
