@@ -5,6 +5,7 @@ class Solution:
         :type nums: List[int]
         :rtype: int
         """
+        # https://leetcode.com/problems/shortest-unsorted-continuous-subarray/discuss/103066/Ideas-behind-the-O(n)-two-pass-and-one-pass-solutions
         # Backward, get the min of subarray starting from current item
         # Forward, get the max of subarray ending with current item
         # Then,
