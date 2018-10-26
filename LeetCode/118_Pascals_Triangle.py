@@ -25,3 +25,30 @@ class Solution(object):
             result_list.append(1)  # Add a new 1 in the end
 
         return result_list
+
+    def generate_v2(self, numRows):
+        """
+        :type numRows: int
+        :rtype: List[List[int]]
+        """
+        result = []
+        if numRows == 0:
+            return result
+        numRows -= 1
+        result.append([1])
+        if numRows == 0:
+            return result
+        numRows -= 1
+        cur_row = [1, 1]
+        result.append(cur_row)
+
+        for _ in range(numRows):
+            cur_row = list(cur_row)
+            last = cur_row[0]
+            for i in range(1, len(cur_row)):
+                tmp = cur_row[i]
+                cur_row[i] += last
+                last = tmp
+            cur_row.append(last)
+            result.append(cur_row)
+        return result

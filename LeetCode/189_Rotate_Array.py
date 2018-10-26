@@ -6,6 +6,7 @@ class Solution(object):
         :type k: int
         :rtype: void Do not return anything, modify nums in-place instead.
         """
+        # DFS based in-place modification
         k %= len(nums)
         i, cur_val = 0, nums[0]
         visited = set()
