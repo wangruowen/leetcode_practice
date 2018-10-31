@@ -23,6 +23,7 @@ class Solution:
 
         max_profit = 0
         for each in worker:
+            # Be careful on the bisect_left, it could be 0, could be len(diff)
             diff_index = bisect.bisect_left(difficulty, each)
             if diff_index == 0 and difficulty[0] > each:
                 continue

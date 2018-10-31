@@ -34,3 +34,24 @@ class Solution(object):
             return right_result
 
         return None
+
+    def kthSmallest_v2(self, root, k):
+        """
+        :type root: TreeNode
+        :type k: int
+        :rtype: int
+        """
+        # Iterative Inorder Traversal
+        if not root:
+            return None
+        cur, stack = root, []
+        while cur or stack:
+            while cur:
+                stack.append(cur)
+                cur = cur.left
+            cur = stack.pop()
+            k -= 1
+            if k == 0:
+                return cur.val
+            cur = cur.right
+
