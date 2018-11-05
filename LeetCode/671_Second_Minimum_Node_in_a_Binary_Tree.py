@@ -44,4 +44,29 @@ class Solution(object):
                 self.helper(first)
                 self._sec_min = min(self._sec_min, next.val)
 
+    def findSecondMinimumValue_iterative(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        if not root:
+            return -1
+        sec_min = float('inf')
+        stack = [root]  # If both children are the same, we have to explore one by one
+        while stack:
+            cur = stack.pop()
+            if cur.left:
+                if cur.val == cur.left.val and cur.val < cur.right.val:
+                    sec_min = min(sec_min, cur.right.val)
+                    stack.append(cur.left)
+                elif cur.val == cur.right.val and cur.val < cur.left.val:
+                    sec_min = min(sec_min, cur.left.val)
+                    stack.append(cur.right)
+                elif cur.val == cur.left.val == cur.right.val:
+                    stack.append(cur.left)
+                    stack.append(cur.right)
+
+        return sec_min if sec_min != float('inf') else -1
+
+
 

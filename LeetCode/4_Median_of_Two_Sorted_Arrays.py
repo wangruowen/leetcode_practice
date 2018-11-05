@@ -73,12 +73,64 @@ class Solution(object):
         return -1
 
 
+    def findMedianSortedArrays_v2(self, nums1, nums2):
+        """
+        :type nums1: List[int]
+        :type nums2: List[int]
+        :rtype: float
+        """
+        def getKthMin(start1, end1, start2, end2, k):
+            """
+            Generalize to find Kth minimum number, k starts from 1
+            :param start1:
+            :param end1:
+            :param start2:
+            :param end2:
+            :param k:
+            :return:
+            """
+            len1 = end1 - start1
+            len2 = end2 - start2
+            if len1 == 0:
+                return nums2[start2 + k - 1]
+            elif len2 == 0:
+                return nums1[start1 + k - 1]
 
-a = [3, 4, 5, 6, 7, 8]
-b = [0, 1, 2]
+            if k == 1:
+                return min(nums1[start1], nums2[start2])
+
+            i = min(start1 + k // 2 - 1, end1 - 1)
+            j = min(start2 + k // 2 - 1, end2 - 1)
+            if nums1[i] > nums2[j]:
+                # Numbers smaller than nums2[j] can be excluded
+                exclude_num = j - start2 + 1
+                start2 = j + 1
+            else:
+                # Numbers smaller than nums1[i] can be excluded
+                exclude_num = i - start1 + 1
+                start1 = i + 1
+            return getKthMin(start1, end1, start2, end2, k - exclude_num)
+
+        m, n = len(nums1), len(nums2)
+        # Now consider even and odd cases
+        total = m + n
+        if total % 2 == 0:
+            # If total is even, the median is the average of total // 2 and total // 2 + 1
+            return (getKthMin(0, m, 0, n, total // 2) + getKthMin(0, m, 0, n, total // 2 + 1)) / 2
+        else:
+            # If total is odd, the median is total // 2 + 1
+            return getKthMin(0, m, 0, n, total // 2 + 1)
+
+
+#
+# a = [3, 4, 5, 6, 7, 8]
+# b = [0, 1, 2]
+
+a = [1,2]
+b = [3,4]
 
 s = Solution()
-print(s.findMedianSortedArrays(a, b))
+print(s.findMedianSortedArrays_v2(a, b))
 
-print(s.general_binary_search(a, 5))
-print(s.general_binary_search(b, 2))
+# print(s.general_binary_search(a, 5))
+# print(s.general_binary_search(b, 2))

@@ -34,3 +34,30 @@ class Solution(object):
 
         DFS(root, [])
         return self.count
+
+    def pathSum_v2(self, root, sum):
+        """
+        :type root: TreeNode
+        :type sum: int
+        :rtype: int
+        """
+        result = 0
+
+        def DFS(node, path_vals=[]):
+            nonlocal result
+            if not node:
+                return
+
+            new_path_vals = [node.val]
+            for i in path_vals:
+                new_path_vals.append(i + node.val)
+            for each in new_path_vals:
+                if each == sum:
+                    result += 1
+            if node.left:
+                DFS(node.left, new_path_vals)
+            if node.right:
+                DFS(node.right, new_path_vals)
+
+        DFS(root)
+        return result
