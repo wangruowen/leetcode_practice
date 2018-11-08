@@ -27,3 +27,16 @@ class Solution(object):
         """
         return self.findBadVersionInRange(1, n)
 
+    def firstBadVersion_v2(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        i, j = 1, n + 1
+        while i < j:
+            mid = (i + j) // 2
+            if isBadVersion(mid):
+                j = mid
+            else:
+                i = mid + 1
+        return i
