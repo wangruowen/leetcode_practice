@@ -37,6 +37,22 @@ class Solution(object):
 
         return nums[0]
 
+    def findMin_v3(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        left, right = 0, len(nums) - 1
+        while left <= right:
+            mid = (left + right) // 2
+            if mid < len(nums)-1 and nums[mid] > nums[mid + 1]:
+                return nums[mid + 1]
+            if nums[left] > nums[mid]:
+                right = mid - 1
+            else:
+                left = mid + 1
+        return nums[0]
+
 
 s = Solution()
 print(s.findMin_v2([4, 5, 6, 7, 0, 1, 2]))

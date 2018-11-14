@@ -57,9 +57,66 @@ class Solution(object):
                 return mid
         return -1
 
+    def search_v2(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: int
+        """
+        if len(nums) == 0:
+            return -1
+
+        # Two cases,
+        # 1. Target is in the ordered half
+        # 2. Target is in the half with pivot
+        def helper(start, end):
+            """
+            start inclusive, end exclusive
+            """
+            mid = (start + end) // 2
+            if nums[mid] == target:
+                return mid
+            if start == mid:
+                return -1
+
+            if nums[start] < nums[mid]:
+                # this part is ordered
+                if nums[start] <= target < nums[mid]:
+                    return helper(start, mid)
+                else:
+                    # target should be in the pivot part
+                    return helper(mid, end)
+            else:
+                # nums[start] > nums[mid], which has pivot
+                if nums[mid] < target <= nums[end - 1]:
+                    return helper(mid, end)
+                else:
+                    # target should be in the pivot part
+                    return helper(start, mid)
+        return helper(0, len(nums))
+
+    def search_iterative(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: int
+        """
+        left, right = 0, len(nums) - 1
+        while left <= right:
+            mid = (left + right) // 2
+            if nums[mid] == target:
+                return mid
+            elif nums[mid] >= nums[left] and nums[left] <= target < nums[mid] or \
+                nums[mid] < nums[left] and not (nums[mid] < target <= nums[right]):
+                right = mid - 1
+            else:
+                left = mid + 1
+        return -1
 
 s = Solution()
-a = [1, 3]
-target = 2
-print("Pivot: %d, Value: %d" % (s._get_pivot(a)))
-print("Target '%d' is located at %d" % (target, s.search(a, target)))
+# a = [1, 3]
+# target = 2
+a = [5, 1, 3]
+target = 3
+# print("Pivot: %d, Value: %d" % (s._get_pivot(a)))
+print("Target '%d' is located at %d" % (target, s.search_v2(a, target)))

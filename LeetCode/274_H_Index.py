@@ -6,6 +6,7 @@ class Solution:
         :rtype: int
         """
         # for i-th item in h_array keeps how many papers have i citations
+        # h_array uses each citation as index to keep how many papers are on each citation
         h_array = [0 for _ in range(len(citations) + 1)]
         for each in citations:
             if each >= len(citations):

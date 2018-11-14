@@ -26,3 +26,24 @@ class Solution(object):
             total += self.sumOfLeftLeaves(root.right)
 
         return total
+
+    def sumOfLeftLeaves_iterative(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        result = 0
+        if not root:
+            return result
+
+        stack = [root]
+        while stack:
+            node = stack.pop()
+            if node.right:
+                stack.append(node.right)
+            if node.left:
+                if not node.left.left and not node.left.right:
+                    result += node.left.val
+                else:
+                    stack.append(node.left)
+        return result

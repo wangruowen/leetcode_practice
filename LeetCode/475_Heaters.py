@@ -26,8 +26,28 @@ class Solution(object):
             return 0
         return self._find_closest_heater_dist(house_pos, heaters, start, end)
 
-
-
+    def findRadius_bisect(self, houses, heaters):
+        """
+        :type houses: List[int]
+        :type heaters: List[int]
+        :rtype: int
+        """
+        import bisect
+        # For each house, find tis nearest warmer, calculate the radius,
+        # and return the max radius
+        houses.sort()
+        heaters.sort()
+        max_radius = float('-inf')
+        for each in houses:
+            i = bisect.bisect(heaters, each)
+            if i == 0:
+                radius = abs(heaters[i] - each)
+            elif i == len(heaters):
+                radius = abs(heaters[-1] - each)
+            else:
+                radius = min(each - heaters[i - 1], heaters[i] - each)
+            max_radius = max(max_radius, radius)
+        return max_radius
 
 s = Solution()
 # houses = [1,1,1,1,1,1,999,999,999,999,999]

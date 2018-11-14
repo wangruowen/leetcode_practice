@@ -9,6 +9,7 @@ class Solution(object):
         # queues as values
         # DP
         # dp[len] keeps the minimum value of subsequence with length "len"
+        # dp is increasing
         if len(nums) == 0: return 0
         dp = [nums[0]]
         for each in nums[1:]:

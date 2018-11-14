@@ -49,18 +49,26 @@ class Solution(object):
         :type root: TreeNode
         :rtype: int
         """
-        # Recursive. Rule is still the same
-        # Get Max from Either root with root's grandchild
-        # Or root.left.max + root.right.max
-        def max_of_cur_node(node):
+        # Recursive same idea
+        # Either choose root with root's grandchild
+        # Or choose root.left + root.right
+        cache = {}
+        def max_of_node(node):
             if not node:
                 return 0
-            cur_max = max_of_cur_node(node.left) + max_of_cur_node(node.right)
+            if node in cache:
+                return cache[node]
+
+            children_max = max_of_node(node.left) + max_of_node(node.right)
+            grandchildren_max = node.val
             if node.left:
+                grandchildren_max += max_of_node(node.left.left) + max_of_node(node.left.right)
+            if node.right:
+                grandchildren_max += max_of_node(node.right.left) + max_of_node(node.right.right)
 
-
-
-
+            cache[node] = max(children_max, grandchildren_max)
+            return cache[node]
+        return max_of_node(root)
 
 
 

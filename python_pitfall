@@ -18,11 +18,31 @@ head = last
 
 # 4. Binary Search
 def _binary_search(self, nums, target):
+    """
+    When end is exclusive, the while loop condition is start < end
+    then end = mid, start = mid + 1
+    """
     start, end = 0, len(nums)
     while start < end:
         mid = (start + end) / 2
         if target < nums[mid]:
             end = mid
+        elif target > nums[mid]:
+            start = mid + 1
+        else:
+            return mid
+    return -1
+
+def _binary_search(self, nums, target):
+    """
+    When end is inclusive, the while loop condition is start <= end
+    then end = mid - 1, start = mid + 1
+    """
+    start, end = 0, len(nums) - 1
+    while start <= end:
+        mid = (start + end) // 2
+        if target < nums[mid]:
+            end = mid - 1
         elif target > nums[mid]:
             start = mid + 1
         else:

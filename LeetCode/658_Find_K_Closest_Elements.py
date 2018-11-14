@@ -30,6 +30,26 @@ class Solution(object):
 
         return sorted(result)
 
+    def findClosestElements_v2(self, arr, k, x):
+        """
+        :type arr: List[int]
+        :type k: int
+        :type x: int
+        :rtype: List[int]
+        """
+        import bisect
+        i = bisect.bisect_right(arr, x)
+        l, r = i - 1, i
+        for _ in range(k):
+            left_diff = x - arr[l] if l >= 0 else float('inf')
+            right_diff = arr[r] - x if r < len(arr) else float("inf")
+            if left_diff <= right_diff:
+                l -= 1
+            else:
+                r += 1
+        return arr[l+1:r]
+
+
 s = Solution()
 arr = [1,2,3,4,5]
 k = 4
