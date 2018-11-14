@@ -29,3 +29,26 @@ class Solution:
             return True
 
         return helper(root, float('-inf'), float('inf'))
+
+    def isValidBST_v2(self, root):
+        """
+        :type root: TreeNode
+        :rtype: bool
+        """
+        # Do In-order Traversal once and check whether the result array is increasing like sorted
+        # During In-order Traversal, every time we visit a node, it should be bigger than previous one
+        cur_max = float('-inf')
+        def inorder_helper(node):
+            nonlocal cur_max
+            if not node:
+                return True
+            if not inorder_helper(node.left):
+                return False
+            if node.val <= cur_max:
+                return False
+            else:
+                cur_max = node.val
+            if not inorder_helper(node.right):
+                return False
+            return True
+        return inorder_helper(root)

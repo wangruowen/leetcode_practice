@@ -44,6 +44,21 @@ class Solution(object):
         dp[node] = max(grandchild_max, child_max)
         return dp[node]
 
+    def rob_v2(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        # Recursive. Rule is still the same
+        # Get Max from Either root with root's grandchild
+        # Or root.left.max + root.right.max
+        def max_of_cur_node(node):
+            if not node:
+                return 0
+            cur_max = max_of_cur_node(node.left) + max_of_cur_node(node.right)
+            if node.left:
+
+
 
 
 
