@@ -59,7 +59,7 @@ while i < j:
 return True
 
 # 6. To memoize if one substring is a palindrome
-dp[i][j] refers to whether s[i:j] is a palindrome
+# dp[i][j] refers to whether s[i:j] is a palindrome
 for i in range(len(s)):
     dp[i][i] = True
     if i < len(s) - 1 and s[i] == s[i+1]:

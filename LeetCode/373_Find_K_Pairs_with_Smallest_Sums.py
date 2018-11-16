@@ -18,6 +18,32 @@ class Solution(object):
 
         return heapq.nsmallest(k, ([u, v] for u in nums1 for v in nums2), key=sum)
 
+    def kSmallestPairs_v2(self, nums1, nums2, k):
+        # https://leetcode.com/problems/find-k-pairs-with-smallest-sums/discuss/84551/simple-Java-O(KlogK)-solution-with-explanation
+        if len(nums1) == 0 or len(nums2) == 0:
+            return []
+
+        q = []
+        cur_k = 0
+        for i, each in enumerate(nums1):
+            heapq.heappush(q, (each + nums2[0], [i, 0]))
+            cur_k += 1
+            if cur_k == k:
+                break
+
+        result = []
+        cnt = 0
+        while cnt < k and q:
+            _, pair = heapq.heappop(q)
+            i, j = pair
+            result.append([nums1[i], nums2[j]])
+            cnt += 1
+            j += 1
+            if j == len(nums2):
+                continue
+            heapq.heappush(q, (nums1[i] + nums2[j], [i, j]))
+        return result
+
 
 s = Solution()
 nums1 = \

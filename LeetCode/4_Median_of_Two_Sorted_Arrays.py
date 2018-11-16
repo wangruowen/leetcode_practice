@@ -103,6 +103,16 @@ class Solution(object):
             j = min(start2 + k // 2 - 1, end2 - 1)
             if nums1[i] > nums2[j]:
                 # Numbers smaller than nums2[j] can be excluded
+                # Essentially, numbers smaller than nums2[j] must be included in
+                # the first k
+                # This can be proved by contradiction
+                # Suppose we have a number nums2[j-p] < nums2[j] is not included in the first k
+                # Then the first k numbers must be
+                # nums1[i] (which has k / 2) + nums2[j] (except p, which has k/2 - 1)
+                # + one number q either after nums1[i] or nums2[j].
+                # But q > nums1[i] > nums[j] > nums[j-p], thus it is contradictory
+                # that q is included in the first k, but not nums[j-p].
+                # Therefore, nums[j-p] must be included in the first k
                 exclude_num = j - start2 + 1
                 start2 = j + 1
             else:
