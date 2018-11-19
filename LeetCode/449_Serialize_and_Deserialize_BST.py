@@ -80,6 +80,48 @@ class Codec:
         return buildTree(preorder, inorder)
 
 
+class Codec2:
+    def serialize(self, root):
+        """Encodes a tree to a single string.
+
+        :type root: TreeNode
+        :rtype: str
+        """
+        # Preorder Traversal
+        if not root:
+            return ""
+
+        stack = [root]
+        nodes = []
+        while stack:
+            node = stack.pop()
+            nodes.append(node.val)
+            if node.right:
+                stack.append(node.right)
+            if node.left:
+                stack.append(node.left)
+        return ",".join(map(str, nodes))
+
+    def deserialize(self, data):
+        """Decodes your encoded data to tree.
+
+        :type data: str
+        :rtype: TreeNode
+        """
+        if data == "":
+            return None
+        from collections import deque
+        q = deque(map(int, data.split(",")))
+        def build(minval, maxval):
+            if q and minval < q[0] < maxval:
+                val = q.popleft()
+                node = TreeNode(val)
+                node.left = build(minval, val)
+                node.right = build(val, maxval)
+                return node
+            return None
+
+        return build(float('-inf'), float('inf'))
 
 
 # Your Codec object will be instantiated and called as such:

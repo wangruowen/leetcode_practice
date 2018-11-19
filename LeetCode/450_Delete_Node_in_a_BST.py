@@ -45,3 +45,70 @@ class Solution(object):
 
         return root
 
+    def deleteNode_v2(self, root, key):
+        """
+        :type root: TreeNode
+        :type key: int
+        :rtype: TreeNode
+        """
+        if not root:
+            return None
+        elif key < root.val:
+            root.left = self.deleteNode(root.left, key)
+        elif key > root.val:
+            root.right = self.deleteNode(root.right, key)
+        else:
+            # key == root.val
+            # If root is leaf, then just delete it
+            if not root.left and not root.right:
+                root = None
+            elif not root.left:
+                root = root.right
+            elif not root.right:
+                root = root.left
+            else:
+                # Both left and right exist
+                # use the most left child on the right side to replace
+                last, node = None, root.right
+                while node.left:
+                    last, node = node, node.left
+                root.val = node.val
+                if last:
+                    last.left = node.right
+                else:
+                    root.right = node.right
+
+        return root
+
+    def deleteNode_v3(self, root, key):
+        """
+        :type root: TreeNode
+        :type key: int
+        :rtype: TreeNode
+        """
+        if not root:
+            return None
+        elif key < root.val:
+            root.left = self.deleteNode(root.left, key)
+        elif key > root.val:
+            root.right = self.deleteNode(root.right, key)
+        else:
+            # key == root.val
+            # We use root.right to replace root
+            # the original root.right.left will be put
+            # on the most right child of the root.left
+            if root.right:
+                new_root = root.right
+                if root.left:
+                    tmp = root.left
+                    while tmp.right:
+                        tmp = tmp.right
+                    tmp.right = root.right.left
+                    new_root.left = root.left
+                root = new_root
+            elif root.left:
+                root = root.left
+            else:
+                root = None
+
+        return root

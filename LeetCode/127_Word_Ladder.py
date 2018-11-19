@@ -61,9 +61,7 @@ class Solution(object):
         self.remainingWordSet -= next_layer_word_set
         return self.next_layer_of_words(next_layer_word_set, length)
 
-    # deprecated
-    @staticmethod
-    def is_one_letter_diff(word1, word2):
+    def is_one_letter_diff(self, word1, word2):
         if word1 == word2:
             return False
 
@@ -75,6 +73,36 @@ class Solution(object):
                     return False
         return True
 
+    def ladderLength_v2(self, beginWord, endWord, wordList):
+        """
+        :type beginWord: str
+        :type endWord: str
+        :type wordList: List[str]
+        :rtype: int
+        """
+        # Since words are all lowcase letters, we can optimize it by
+        # checking a-z
+        if endWord not in wordList:
+            return 0
+
+        cur_level = [beginWord]
+        visited = set([beginWord])
+        wordListset = set(wordList)
+        level = 1
+        while cur_level:
+            next_level = []
+            level += 1
+            for each in cur_level:
+                for i in range(len(each)):
+                    for c in "abcdefghijklmnopqrstuvwxyz":
+                        new_word = each[:i] + c + each[i+1:]
+                        if new_word not in visited and new_word in wordListset:
+                            if new_word == endWord:
+                                return level
+                            next_level.append(new_word)
+                            visited.add(new_word)
+            cur_level = next_level
+        return 0
 
 s = Solution()
 beginWord = "charge"
@@ -299,4 +327,4 @@ wordList = \
  "droopy", "palled", "cherry", "proves", "mobbed", "spaded", "cheese", "pluses", "bathes", "motels", "spewed", "soaked",
  "howler", "puffed", "malled", "shrike", "slided", "fulled", "pouted", "shames", "lessen", "ringed", "teemed", "grands",
  "linked", "wooten", "feuded", "deaden", "scents", "flutes", "salton"]
-print(s.ladderLength(beginWord, endWord, wordList))
+print(s.ladderLength_v2(beginWord, endWord, wordList))

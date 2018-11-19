@@ -39,5 +39,34 @@ class Solution:
             forward = not forward
         return result
 
+    def zigzagLevelOrder_v2(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[List[int]]
+        """
+        # Do the same layer-by-layer BFS as usual,
+        # use a forward flag to reverse the values if needed
+        if not root:
+            return []
+
+        result = []
+        cur_layer = [root]
+        forward = True
+        while cur_layer:
+            cur_vals, new_layer = [], []
+            for each in cur_layer:
+                cur_vals.append(each.val)
+                if each.left:
+                    new_layer.append(each.left)
+                if each.right:
+                    new_layer.append(each.right)
+            if not forward:
+                result.append(cur_vals[::-1])
+            else:
+                result.append(cur_vals)
+            forward = not forward
+            cur_layer = new_layer
+        return result
+
 s = Solution()
 root = TreeNode(1)
