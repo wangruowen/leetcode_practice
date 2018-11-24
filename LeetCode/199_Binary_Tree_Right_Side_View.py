@@ -33,6 +33,23 @@ class Solution:
             last = node
         return result
 
+    def rightSideView_DFS(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[int]
+        """
+        # DFS Recursive
+        result = []
+        if not root:
+            return result
+        result.append(root.val)
+        left_result = self.rightSideView_DFS(root.left) if root.left else []
+        right_result = self.rightSideView_DFS(root.right) if root.right else []
+        result.extend(right_result)
+        result.extend(left_result[len(right_result):])
+        return result
+
+
 s = Solution()
 root = TreeNode(1)
 root.left = TreeNode(2)
