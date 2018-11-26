@@ -31,6 +31,23 @@ class Solution:
             longest = max(longest, cur - start)
         return longest
 
+    def lengthOfLongestSubstringTwoDistinct_v2(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        counter = Counter()
+        start = maxlen = 0
+        for i, c in enumerate(s):
+            counter[c] += 1
+            while len(counter) > 2:
+                counter[s[start]] -= 1
+                if counter[s[start]] == 0:
+                    del counter[s[start]]
+                start += 1
+            maxlen = max(maxlen, i - start + 1)
+        return maxlen
+
 s = Solution()
 test_str = "eceba"
 print(s.lengthOfLongestSubstringTwoDistinct(test_str))

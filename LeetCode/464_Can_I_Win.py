@@ -40,7 +40,50 @@ class Solution(object):
 
         return self.mem[key]
 
+    def canIWin_v2(self, maxChoosableInteger, desiredTotal):
+        """
+        :type maxChoosableInteger: int
+        :type desiredTotal: int
+        :rtype: bool
+        """
+        if desiredTotal == 0:
+            return True
+        if sum(range(1, maxChoosableInteger + 1)) < desiredTotal:
+            return False
+        dp_cache = {}  # Key is (remain_nums_bitmap, sum_so_far)
+
+        def to_bitmap(remain_nums):
+            bitmap = 0
+            for i in remain_nums:
+                bitmap |= 1 << i
+            return bitmap
+
+        def helper(remain_nums, sum_so_far=0):
+            nonlocal dp_cache
+
+            key = (to_bitmap(remain_nums), sum_so_far)
+            if key in dp_cache:
+                return dp_cache[key]
+
+            if sum_so_far >= desiredTotal:
+                dp_cache[key] = False
+                return False
+
+            for c in remain_nums:
+                # print("Player ", player, " choose ", c)
+                remain_nums.remove(c)
+                if not helper(set(remain_nums), sum_so_far + c):
+                    # If the other side has no way to win, then I win
+                    dp_cache[key] = True
+                    return True
+                remain_nums.add(c)
+
+            dp_cache[key] = False
+            return False
+        return helper(set(range(1, maxChoosableInteger + 1)))
+
+
 s = Solution()
-print(s.canIWin(5, 50))
+print(s.canIWin_v2(18,171))
 
 
