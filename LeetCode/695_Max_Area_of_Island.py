@@ -10,11 +10,11 @@ class Solution(object):
         for i in range(self.row_len):
             for j in range(self.col_len):
                 if grid[i][j] == 1:
-                    max_area = max(max_area, self.dfs(i, j, grid))
+                    max_area = max(max_area, self.bfs(i, j, grid))
 
         return max_area
 
-    def dfs(self, i, j, grid):
+    def bfs(self, i, j, grid):
         area = 0
         stack = [(i, j)]
         while len(stack) > 0:
