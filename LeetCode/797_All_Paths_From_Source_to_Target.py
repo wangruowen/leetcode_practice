@@ -21,6 +21,22 @@ class Solution(object):
 
         return result
 
+    def allPathsSourceTarget_DFS(self, graph):
+        """
+        :type graph: List[List[int]]
+        :rtype: List[List[int]]
+        """
+        def DFS(i, stack, result):
+            if i == len(graph) - 1:
+                result.append(list(stack))
+            for j in graph[i]:
+                stack.append(j)
+                DFS(j, stack, result)
+                stack.pop()
+        result = []
+        DFS(0, [0], result)
+        return result
+
 s = Solution()
 graph = [[1,2], [3], [3], []]
 print(s.allPathsSourceTarget(graph))

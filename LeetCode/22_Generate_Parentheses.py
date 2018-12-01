@@ -10,6 +10,8 @@ class Solution(object):
         #                "()%s" % exist_parentheses,
         #                "%s()" % exist_parentheses])
         # this doesn't work
+        # Instead,
+        # We should insert the pair of parentheses to each gap of an existing string
         total_set = []
         self.helper(n, total_set, set([""]))
         return total_set
