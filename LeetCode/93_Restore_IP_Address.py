@@ -31,10 +31,36 @@ class Solution(object):
             self.helper(rest_s[3:], parts - 1, all_ips, exist_set)
             exist_set.pop()
 
+    def restoreIpAddresses_v2(self, s):
+        """
+        :type s: str
+        :rtype: List[str]
+        """
+        result = []
+
+        def dfs(i, stack):
+            if i == len(s) and len(stack) == 4:
+                result.append(".".join(stack))
+                return
+            elif i == len(s) or len(stack) == 4:
+                return
+
+            for j in range(i + 1, min(i + 4, len(s) + 1)):
+                if s[i] == '0' and j != i + 1:
+                    continue
+                cur = int(s[i:j])
+                if 0 <= cur <= 255:
+                    stack.append(s[i:j])
+                    dfs(j, stack)
+                    stack.pop()
+
+        dfs(0, [])
+        return result
+
 
 s = Solution()
 s1 = "25525511135"
-print(s.restoreIpAddresses(s1))
+print(s.restoreIpAddresses_v2(s1))
 
 
 

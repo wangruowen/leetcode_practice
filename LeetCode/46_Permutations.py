@@ -21,3 +21,23 @@ class Solution(object):
             new_set.append(nums[i])
             self.helper(nums[:i] + nums[i + 1:], new_set)
 
+    def permute_v2(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        result = []
+
+        def helper(rest_nums, stack=[]):
+            if not rest_nums:
+                result.append(stack[:])
+
+            for i in rest_nums:
+                new_rest_nums = set(rest_nums)
+                new_rest_nums.remove(i)
+                stack.append(i)
+                helper(new_rest_nums, stack)
+                stack.pop()
+
+        helper(nums)
+        return result

@@ -17,6 +17,28 @@ class Solution(object):
 
         return [list(each_set) for each_set in result]
 
+    def subsetsWithDup_v2(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        nums.sort()
+        result = [[]]
+        last_result = None
+        for i in range(len(nums)):
+            parent_result = result
+            if i > 0 and nums[i] == nums[i-1]:
+                parent_result = last_result
+            new_result = []
+            for each_set in parent_result:
+                new_set = each_set[:]
+                new_set.append(nums[i])
+                new_result.append(new_set)
+            result.extend(new_result)
+            last_result = new_result
+        return result
+
+
 s = Solution()
-nums = [1,2,2]
-print(s.subsetsWithDup(nums))
+nums = [3,1,2,2]
+print(s.subsetsWithDup_v2(nums))

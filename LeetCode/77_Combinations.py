@@ -38,7 +38,28 @@ class Solution(object):
 
         return result_comb
 
+    def combine_v2(self, n, k):
+        """
+        :type n: int
+        :type k: int
+        :rtype: List[List[int]]
+        """
+        result = []
 
+        def helper(nums, stack, k):
+            if k == 0:
+                result.append(stack[:])
+                return
+            if not nums:
+                return
+
+            for i, c in enumerate(nums):
+                stack.append(c)
+                helper(nums[i + 1:], stack, k - 1)
+                stack.pop()
+
+        helper(list(range(1, n + 1)), [], k)
+        return result
 s = Solution()
 start_time = datetime.datetime.now()
 print(s.combine(20, 16))

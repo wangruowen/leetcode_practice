@@ -47,6 +47,36 @@ class Solution(object):
     def copy(self, board):
         return [row[:] for row in board]
 
+    def exist_v2(self, board, word):
+        """
+        :type board: List[List[str]]
+        :type word: str
+        :rtype: bool
+        """
+        rowlen, collen = len(board), len(board[0])
+
+        def DFS(i, j, word_index):
+            if board[i][j] == word[word_index]:
+                word_index += 1
+                if word_index == len(word):
+                    return True
+
+                for di, dj in [[-1, 0], [1, 0], [0, 1], [0, -1]]:
+                    ip, jp = i + di, j + dj
+                    if 0 <= ip < rowlen and 0 <= jp < collen and (ip, jp) not in visited:
+                        visited.add((ip, jp))
+                        if DFS(ip, jp, word_index):
+                            return True
+                        visited.remove((ip, jp))
+            return False
+
+        for i in range(rowlen):
+            for j in range(collen):
+                visited = set([(i, j)])
+                if DFS(i, j, 0):
+                    return True
+        return False
+
 s = Solution()
 board = \
 [["A","B","C","E"],["S","F","E","S"],["A","D","E","E"]]

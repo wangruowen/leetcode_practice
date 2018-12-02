@@ -26,6 +26,31 @@ class Solution(object):
                 self.helper(k - 1, n - num, cur_combin, avail_nums[i + 1:], total_combins)
                 cur_combin.pop()
 
+    def combinationSum3_v2(self, k, n):
+        """
+        :type k: int
+        :type n: int
+        :rtype: List[List[int]]
+        """
+        result = []
+
+        def helper(i, stack, target):
+            if target == 0 and len(stack) == k:
+                result.append(list(stack))
+                return
+            elif target == 0 or len(stack) == k:
+                return
+
+            while i <= min(9, target):
+                stack.append(i)
+                helper(i + 1, stack, target - i)
+                stack.pop()
+                i += 1
+
+        helper(1, [], n)
+        return result
+
+
 s = Solution()
 k = 3
 n = 9

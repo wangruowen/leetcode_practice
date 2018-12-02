@@ -24,7 +24,26 @@ class Solution(object):
                 self._helper(s[i:], parti_so_far, result)
                 parti_so_far.pop()
 
+    def partition_v2(self, s):
+        """
+        :type s: str
+        :rtype: List[List[str]]
+        """
+        result = []
 
+        def helper(i, stack):
+            if i == len(s):
+                result.append(stack[:])
+                return
+
+            for j in range(i + 1, len(s) + 1):
+                if s[i:j] == s[i:j][::-1]:
+                    stack.append(s[i:j])
+                    helper(j, stack)
+                    stack.pop()
+
+        helper(0, [])
+        return result
 s = Solution()
 a = "aab"
 print(s.partition(a))
