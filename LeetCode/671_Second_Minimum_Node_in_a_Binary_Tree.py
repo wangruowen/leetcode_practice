@@ -68,5 +68,40 @@ class Solution(object):
 
         return sec_min if sec_min != float('inf') else -1
 
+    def findSecondMinimumValue_v2(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        # The root should be the smallest
+        # One child should be the same as root,
+        # The other child should be bigger than root
+        # Then the second min is min(findSecondMin(root.left), root.right)
+        if not root or (not root.left and not root.right):
+            return -1
+
+        if root.left.val == root.right.val:
+            left_second_min = self.findSecondMinimumValue(root.left)
+            right_second_min = self.findSecondMinimumValue(root.right)
+            if left_second_min < 0 and right_second_min < 0:
+                return -1
+            elif left_second_min < 0:
+                return right_second_min
+            elif right_second_min < 0:
+                return left_second_min
+            else:
+                return min(left_second_min, right_second_min)
+
+        elif root.right.val > root.val:
+            left_second_min = self.findSecondMinimumValue(root.left)
+            if left_second_min < 0:
+                return root.right.val
+            return min(left_second_min, root.right.val)
+        elif root.left.val > root.val:
+            right_second_min = self.findSecondMinimumValue(root.right)
+            if right_second_min < 0:
+                return root.left.val
+            return min(right_second_min, root.left.val)
+
 
 
